@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ParkAPI.Models;
 using CsvHelper;
+using CvsHelper.Configuration;
+using System.IO;
+using System.Globalization;
 
 namespace ParkAPI.Controllers
 {
@@ -20,10 +23,30 @@ namespace ParkAPI.Controllers
       _db = db;
     }
 
+    public sealed class ParkMap : ClassMap<Park>
+    {
+        public ParkMap()
+        {
+            AutoMap(CultureInfo.InvariantCulture);
+            Map(m => m.ParkId).Ignore();
+        }
+    }
     [HttpGet("load")]
     public async Task<ActionResult<IEnumerable<Park>>> LoadParks()
     {
-      
+      // var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+      // {
+      //   HeaderValidated = null;
+      // };
+      using (var streamReader = new StreamReader("./Models/SeedData/SF_Park_Scores.csv"))
+      {
+        using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+        {
+          csvReader.Context.RegisterClassMap<ParkMap>();
+          var parkRecords = csvReader.GetRecords<Park>();
+          _db.Parks.AddRange(parkRecords);
+        }
+      }
 
       return await _db.Parks.ToListAsync();
     }

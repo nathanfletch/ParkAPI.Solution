@@ -1,4 +1,4 @@
-ParkID,PSA,Park,FQ,Score,Facility Type,Facility Name,Address,State,Zipcode,Floor Count,Square Feet,Perimeter Length,Acres,Longitude,Latitude
+ParkID,PSA,Name,FQ,Score,Type,Facility Name,Address,State,Zipcode,Floor Count,Square Feet,Perimeter Length,Acres,Longitude,Latitude
 86,PSA4,Carl Larsen Park,FY05Q3,0.795,Basketball Court,Ocean View Basketball Courts,Capitol & Montana St,CA,94112,,5572.02031431,311.98222779,0.1279165,-122.45670775,37.71633478
 13,PSA4,Junipero Serra Playground,FY05Q3,0.957,Ball Field,Glen ball fields,Diamond & Farnum Street,CA,94131,,124520.486259,1891.67544541,2.85860846,-122.44059154,37.73600816
 9,PSA4,Rolph Nicol Playground,FY05Q3,0.864,Dog Play Area,Douglass dog play area,26th & Douglass Street,CA,94114,,70655.3372339,1153.01964642,1.62202984,-122.43889466,37.74674101
