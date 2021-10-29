@@ -10,8 +10,10 @@ using Microsoft.OpenApi.Models;
 
 namespace ParkAPI
 {
+
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +26,19 @@ namespace ParkAPI
             services.AddDbContext<ParkAPIContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
             services.AddControllers();
+            services.AddCors(options =>
+            {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080",
+                                        "http://localhost:8081",
+                                        "http://localhost:5000",
+                                        "http://localhost:5001")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod();
+                });
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ParkAPI", Version = "v1" });
@@ -42,6 +57,8 @@ namespace ParkAPI
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
