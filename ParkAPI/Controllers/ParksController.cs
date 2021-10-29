@@ -20,13 +20,17 @@ namespace ParkAPI.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> GetParks(string type)
+    public async Task<ActionResult<IEnumerable<Park>>> GetParks(string type, int score)
     {
       var query = _db.Parks.AsQueryable();
 
       if(type != null)
       {
         query = query.Where(park => park.Type == type);
+      }
+      if(score != 0)
+      {
+        query = query.Where(park => park.Score == score);
       }
 
       return await query.ToListAsync();
