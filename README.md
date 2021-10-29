@@ -49,7 +49,11 @@ Now you're ready to start making calls to the Park API! Open Postman or your fav
 ## API Documentation
 
 ## Swagger
-Check out Swagger's auto-generated documentation at `http://localhost:5000/swagger`.
+Check out Swagger's auto-generated documentation at `http://localhost:5000/swagger`
+
+## CORS
+CORS is enabled only for these specific ports: `5000`, `5001`, `8080`, `8081`.
+This is to allow a front end app running on 8080 to call this api.
 
 ## Endpoints
 
