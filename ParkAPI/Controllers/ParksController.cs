@@ -5,6 +5,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ParkAPI.Models;
+using CsvHelper;
 
 namespace ParkAPI.Controllers
 {
@@ -17,6 +18,14 @@ namespace ParkAPI.Controllers
     public ParksController(ParkAPIContext db)
     {
       _db = db;
+    }
+
+    [HttpGet("load")]
+    public async Task<ActionResult<IEnumerable<Park>>> LoadParks()
+    {
+      
+
+      return await _db.Parks.ToListAsync();
     }
 
     [HttpGet]
