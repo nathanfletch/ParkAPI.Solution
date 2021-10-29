@@ -37,18 +37,18 @@ namespace ParkAPI.Controllers
       return CreatedAtAction("Post", new { id = park.ParkId }, park);
     }
 
-    // [HttpGet("{id}")]
-    // public async Task<ActionResult<Park>> GetPark(int id)
-    // {
-    //   var park = await _db.Parks.FindAsync(id);
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Park>> GetPark(int id)
+    {
+      var park = await _db.Parks.FindAsync(id);
 
-    //   if (park == null)
-    //   {
-    //     return NotFound();
-    //   }
+      if (park == null)
+      {
+        return NotFound();
+      }
 
-    //   return park;
-    // }
+      return park;
+    }
 
     // [HttpDelete("{id}")]
     // public async Task<IActionResult> DeletePark(int id)
