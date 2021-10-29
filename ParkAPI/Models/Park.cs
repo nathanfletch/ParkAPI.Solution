@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using CsvHelper;
+using CsvHelper.Configuration;
 using System.IO;
 using System.Globalization;
 
@@ -16,5 +17,12 @@ namespace ParkAPI.Models
     public double Score { get; set; }
   }
 
-  
+  public sealed class ParkMap : ClassMap<Park>
+  {
+    public ParkMap()
+    {
+        AutoMap(CultureInfo.InvariantCulture);
+        Map(m => m.ParkId).Ignore();
+    }
+  }
 }
