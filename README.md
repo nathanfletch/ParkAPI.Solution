@@ -46,7 +46,7 @@
 </details>
 
 ## Data Loading
-Now that you've got the project set up, you're ready to start making calls to the Park API! Open Postman or your favorite client.
+Now that you've got the project set up, you're ready to start making calls to the Park API from Postman or your favorite client.
 There are 2 ways to load data:
 * Call the post route over and over - only recommended for the extremely bored.
 * Make a GET request to `http://localhost:5000/api/parks/load`. This will load a .csv file downloaded from [Kaggle](https://www.kaggle.com/danofer/sf-parks) into the database.
@@ -84,14 +84,14 @@ A user can get all parks and customize the list using the following parameters:
 | :---: | :---: | :---: | :---: | --- |
 | type | string | none | Get parks of the specified type. | api/parks/?type=sandbox |
 | minScore | double | none | Gets parks with a higher score than the specified score | api/parks/?minScore=0.11 |
-| maxScore | double | none | Gets parks with a lower score thane the specified date | api/parks/?maxScore=0.9 |
+| maxScore | double | none | Gets parks with a lower score than the specified date | api/parks/?maxScore=0.9 |
 | sorted | bool | false | Sorts parks by score (highest to lowest) | api/parks/?sorted=true |
 
 ### Example Query
 
 `http://localhost:5000/api/parks/?minScore=2&sorted=true`
 
-### Example returned JSON:
+### Example of returned JSON:
 ```
 [
   {
@@ -114,7 +114,7 @@ A user can get all parks and customize the list using the following parameters:
 A user can populate the database with external data from a .csv file.
 ### Example query: 
 `http://localhost:5000/api/parks/load`
-### Example returned JSON: same as above.
+### Example of returned JSON: same format as above.
 
 ## POST /api/parks
 
@@ -183,12 +183,12 @@ A user can delete a park.
 <br>
 
 ## Known Issues
-* There are no known issues at this time.
+* There are no known bugs at this time.
 * Please contact me if you find any bugs or have suggestions. 
 
 ## Future Plans
 * Add more query parameters and endpoints.
-* Add JSON Web Token authentication.
+* Create a JavaScript web app to run on port 8080 to call this API and demonstrate CORS functionality.
 
 ## License
 

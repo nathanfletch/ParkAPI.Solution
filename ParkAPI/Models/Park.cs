@@ -14,6 +14,7 @@ namespace ParkAPI.Models
     [Required]
     public string Name { get; set; }
     public string Type { get; set; }
+    [Range(0, 1, ErrorMessage = "Please enter a decimal between 0 and 1")]
     public double Score { get; set; }
   }
 
