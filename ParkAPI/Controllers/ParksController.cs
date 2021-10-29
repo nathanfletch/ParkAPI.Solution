@@ -20,7 +20,7 @@ namespace ParkAPI.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Park>>> GetParks(string type, int score)
+    public async Task<ActionResult<IEnumerable<Park>>> GetParks(string type, int minScore, int maxScore)
     {
       var query = _db.Parks.AsQueryable();
 
@@ -28,9 +28,13 @@ namespace ParkAPI.Controllers
       {
         query = query.Where(park => park.Type == type);
       }
-      if(score != 0)
+      if(minScore != 0)
       {
-        query = query.Where(park => park.Score == score);
+        query = query.Where(park => park.Score >= minScore);
+      }
+      if(maxScore != 0)
+      {
+        query = query.Where(park => park.Score <= maxScore);
       }
 
       return await query.ToListAsync();
