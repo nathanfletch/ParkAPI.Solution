@@ -50,20 +50,20 @@ namespace ParkAPI.Controllers
       return park;
     }
 
-    // [HttpDelete("{id}")]
-    // public async Task<IActionResult> DeletePark(int id)
-    // {
-    //   var parkToDelete = await _db.Parks.FirstOrDefaultAsync(entry => entry.ParkId == id);
-    //   if (parkToDelete == null)
-    //   {
-    //     return NotFound();
-    //   }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePark(int id)
+    {
+      var parkToDelete = await _db.Parks.FirstOrDefaultAsync(entry => entry.ParkId == id);
+      if (parkToDelete == null)
+      {
+        return NotFound();
+      }
 
-    //   _db.Parks.Remove(parkToDelete);
-    //   await _db.SaveChangesAsync();
+      _db.Parks.Remove(parkToDelete);
+      await _db.SaveChangesAsync();
 
-    //   return NoContent();
-    // }
+      return NoContent();
+    }
 
     // [HttpPut("{id}")]
     // public async Task<IActionResult> PutPark(int id, Park park)
