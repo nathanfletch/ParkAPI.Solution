@@ -65,18 +65,18 @@ namespace ParkAPI.Controllers
       return NoContent();
     }
 
-    // [HttpPut("{id}")]
-    // public async Task<IActionResult> PutPark(int id, Park park)
-    // {
-    //   if (id != park.ParkId)
-    //   {
-    //     return BadRequest();
-    //   }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutPark(int id, [FromBody]Park park)
+    {
+      if (id != park.ParkId)
+      {
+        return BadRequest();
+      }
     
-    //   _db.Entry(park).State = EntityState.Modified;
-    //   await _db.SaveChangesAsync();
+      _db.Entry(park).State = EntityState.Modified;
+      await _db.SaveChangesAsync();
 
-    //   return NoContent();
-    // }
+      return NoContent();
+    }
   }
 }
