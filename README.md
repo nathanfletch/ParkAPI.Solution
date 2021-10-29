@@ -42,8 +42,14 @@
 * `dotnet ef database update`
 * `dotnet run` to start the server.
 
-Now you're ready to start making calls to the Park API! Open Postman or your favorite client and follow the documentation below:   
+
 </details>
+
+## Data Loading
+Now that you've got the project set up, you're ready to start making calls to the Park API! Open Postman or your favorite client.
+There are 2 ways to load data:
+* Call the post route over and over - only recommended for the extremely bored.
+* Make a GET request to `http://localhost:5000/api/parks/load`. This will load a .csv file downloaded from [Kaggle](https://www.kaggle.com/danofer/sf-parks) into the database.
 
 
 ## API Documentation
@@ -63,6 +69,7 @@ Base URL: `http://localhost:5000`
 
 ```
 GET /api/parks
+GET /api/parks/load
 POST /api/parks
 GET /api/parks/{id}
 PUT /api/parks/{id}
@@ -76,8 +83,8 @@ A user can get all parks and customize the list using the following parameters:
 | Parameter | Type | Default | Description | Example Query |
 | :---: | :---: | :---: | :---: | --- |
 | type | string | none | Get parks of the specified type. | api/parks/?type=sandbox |
-| minScore | int | none | Gets parks with a higher score than the specified score | api/parks/?minScore=3 |
-| maxScore | int | none | Gets parks with a lower score thane the specified date | api/parks/?maxScore=5 |
+| minScore | double | none | Gets parks with a higher score than the specified score | api/parks/?minScore=0.11 |
+| maxScore | double | none | Gets parks with a lower score thane the specified date | api/parks/?maxScore=0.9 |
 | sorted | bool | false | Sorts parks by score (highest to lowest) | api/parks/?sorted=true |
 
 ### Example Query
@@ -91,16 +98,23 @@ A user can get all parks and customize the list using the following parameters:
     "parkId": 5,
     "name": "Sands",
     "type": "Sandbox",
-    "score": 5
+    "score": 0.88
   },
   {
     "parkId": 1,
     "name": "Monkey Park",
     "type": "Zoo",
-    "score": 3
+    "score": 0.33
   }
 ]
 ```
+
+## GET /api/parks/load
+
+A user can populate the database with external data from a .csv file.
+### Example query: 
+`http://localhost:5000/api/parks/load`
+### Example returned JSON: same as above.
 
 ## POST /api/parks
 
@@ -113,7 +127,7 @@ A user can add a park.
 {
   "name": "Highland",
   "type": "Basketball court",
-  "score": 5
+  "score": 0.77
 }
 ```
 ### Example of JSON that will be included in the return body:
@@ -122,7 +136,7 @@ A user can add a park.
   "parkId": 6,
   "name": "Highland Court",
   "type": "Basketball court",
-  "score": 5
+  "score": 0.77
 }
 ```
 
@@ -138,7 +152,7 @@ A user can get one park by ID.
   "parkId": 1,
   "name": "Monkey Park",
   "type": "Zoo",
-  "score": 3
+  "score": 0.33
 }
 ```
 
@@ -153,7 +167,7 @@ A user can update details about a park they created.
   "parkId": 1,
   "name": "Monkey Graveyard",
   "type": "Graveyard",
-  "score": 5
+  "score": 1
 }
 ```
 ### Example returned JSON: None
